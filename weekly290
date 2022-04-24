@@ -1,0 +1,131 @@
+# 2248. Intersection of Multiple Arrays
+# User Accepted:8247
+# User Tried:8525
+# Total Accepted:8450
+# Total Submissions:12757
+# Difficulty:Easy
+# Given a 2D integer array nums where nums[i] is a non-empty array of distinct positive integers, return the list of integers that are present in each array of nums sorted in ascending order.
+ 
+
+# Example 1:
+
+# Input: nums = [[3,1,2,4,5],[1,2,3,4],[3,4,5,6]]
+# Output: [3,4]
+# Explanation: 
+# The only integers present in each of nums[0] = [3,1,2,4,5], nums[1] = [1,2,3,4], and nums[2] = [3,4,5,6] are 3 and 4, so we return [3,4].
+# Example 2:
+
+# Input: nums = [[1,2,3],[4,5,6]]
+# Output: []
+# Explanation: 
+# There does not exist any integer present both in nums[0] and nums[1], so we return an empty list [].
+ 
+
+# Constraints:
+
+# 1 <= nums.length <= 1000
+# 1 <= sum(nums[i].length) <= 1000
+# 1 <= nums[i][j] <= 1000
+# All the values of nums[i] are unique.
+
+
+
+
+class Solution(object):
+    def intersection(self, nums):
+        """
+        :type nums: List[List[int]]
+        :rtype: List[int]
+        """
+        # common=[]
+        # for no in nums:
+        #     for i in range(len(no)):
+        #         if i>0:
+        #             if no[i]>no[i-1]:
+        #                 common.append(no[i])
+        
+        
+        #result=[sub_list for sub_list in list_1 if sub_list in list_2]
+        lists_as_set = set(nums[0])
+        if len(nums)>1:
+            
+            for i in range(1,len(nums)):
+                intersection = lists_as_set.intersection(nums[i])
+                lists_as_set=set(intersection)
+            intersection_as_list = list(intersection)
+        else:
+            intersection_as_list=nums[0]
+            #print(intersection)
+
+        #intersection_as_list = list(intersection)
+        # if len(intersection_as_list)>0:
+        #     final.append(intersection_as_list[0])
+        #     for i in range(1,len(intersection_as_list)):
+        #         if intersection_as_list[i-1]<intersection_as_list[i]:
+        #             final.append(intersection_as_list[i])
+        intersection_as_list.sort()
+        return intersection_as_list
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Q2
+
+# Given a 2D integer array circles where circles[i] = [xi, yi, ri] represents the center (xi, yi) and radius ri of the ith circle drawn on a grid, return the number of lattice points that are present inside at least one circle.
+
+# Note:
+
+# A lattice point is a point with integer coordinates.
+# Points that lie on the circumference of a circle are also considered to be inside it.
+ 
+
+# Example 1:
+
+
+# Input: circles = [[2,2,1]]
+# Output: 5
+# Explanation:
+# The figure above shows the given circle.
+# The lattice points present inside the circle are (1, 2), (2, 1), (2, 2), (2, 3), and (3, 2) and are shown in green.
+# Other points such as (1, 1) and (1, 3), which are shown in red, are not considered inside the circle.
+# Hence, the number of lattice points present inside at least one circle is 5.
+# Example 2:
+
+
+# Input: circles = [[2,2,2],[3,4,1]]
+# Output: 16
+# Explanation:
+# The figure above shows the given circles.
+# There are exactly 16 lattice points which are present inside at least one circle. 
+# Some of them are (0, 2), (2, 0), (2, 4), (3, 2), and (4, 4).
+ 
+
+
+
+
+class Solution(object):
+    def countLatticePoints(self, circles):
+        """
+        :type circles: List[List[int]]
+        :rtype: int
+        """
+        pts = set([])
+        for x, y, r in circles:
+            for dx in range(-r, r + 1):
+                for dy in range(-r, r + 1):
+                    if dx**2+dy**2<=r**2:
+                        pts.add((x+dx,y+dy))
+        return len(pts)
