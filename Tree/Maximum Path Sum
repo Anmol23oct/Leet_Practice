@@ -1,0 +1,36 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+#from queue import Queue
+class Solution(object):
+    def maxPathSum(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        
+        self.ans=root.val
+        
+        def MaxSum(root):
+
+            if root is None:
+                return 0
+
+            left=MaxSum(root.left)
+            right=MaxSum(root.right)
+            leftMax=max(left,0)
+            rightMax=max(right,0)
+
+            self.ans=max(self.ans,root.val+leftMax+rightMax)
+
+            return root.val+max(leftMax,rightMax)
+
+
+        MaxSum(root)
+        return self.ans
+        
+        
