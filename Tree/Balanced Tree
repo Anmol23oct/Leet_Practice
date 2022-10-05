@@ -1,0 +1,53 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def isBalanced(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        # if root is None:
+            
+        #     return 0,True
+        
+        # leftheight,isleftBalanced=self.isBalanced(root.left)
+        # rightheight,isrightBalanced=self.isBalanced(root.right)
+        # print("root",root.val)
+        # print("leftheight",leftheight)
+        # print("rightheight",rightheight)
+        # if leftheight-rightheight>1 or rightheight-leftheight>1:
+        #     return 1+max(leftheight,rightheight), False
+        # if isleftBalanced and isrightBalanced:
+        #     return 1+max(leftheight,rightheight),True
+        # else:
+        #     return 1+max(leftheight,rightheight),False
+
+        def temp(root,f):
+
+        # if root.left is None and root.right is None:
+        #     return 1, True
+            print("root")
+            if root is None:
+                return 0,True
+            
+            leftheight,isleftBalanced=temp(root.left,f)
+            rightheight,isrightBalanced=temp(root.right,f)
+            print("root",root.val)
+            print("leftheight",leftheight)
+            print("rightheight",rightheight)
+            if leftheight-rightheight>1 or rightheight-leftheight>1:
+                return 1+max(leftheight,rightheight), False
+            if isleftBalanced and isrightBalanced:
+                return 1+max(leftheight,rightheight),True
+            else:
+                return 1+max(leftheight,rightheight),False
+        
+        height,ans =  temp(root,True)
+        return ans
+            
+        
+        
